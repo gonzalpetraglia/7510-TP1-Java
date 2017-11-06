@@ -1,0 +1,3 @@
+names(gonzalo).
+surname(petraglia).
+completeName(X,Y):-names(X), surname(Y,).
