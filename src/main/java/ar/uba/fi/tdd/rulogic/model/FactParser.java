@@ -20,7 +20,9 @@ public class FactParser {
         try{
             fact = fact.trim();
 
-            if(fact.charAt(fact.length()-1) != '.')
+
+            if(fact.length() == 0
+                    || fact.charAt(fact.length()-1) != '.')
                 throw new InvalidFactException();
 
             fact = fact.substring(0,fact.length()-1);

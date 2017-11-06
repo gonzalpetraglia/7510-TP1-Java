@@ -15,11 +15,11 @@ public class DatabaseBuilder {
         return new Database(factList.toArray(new Fact[0]), ruleList.toArray(new Rule[0]));
     }
 
-    public void addFact(Fact newFact){
+    public void add(Fact newFact){
         factList.add(newFact);
     }
 
-    public void addRule(Rule newRule){
+    public void add(Rule newRule){
         ruleList.add(newRule);
     }
 }

@@ -27,11 +27,12 @@ public class DatabaseParser {
             BufferedReader br = new BufferedReader(new FileReader(fileName));
             String line;
             while ((line = br.readLine()) != null)
-                try {
-                    databaseBuilder.addFact(FactParser.getInstance().parse(line));
-                } catch (InvalidFactException exc) {
-                    databaseBuilder.addRule(RuleParser.getInstance().parse(line));
-                }
+                if(line.trim().length() != 0)
+                    try {
+                        databaseBuilder.add(FactParser.getInstance().parse(line));
+                    } catch (InvalidFactException exc) {
+                        databaseBuilder.add(RuleParser.getInstance().parse(line));
+                    }
         }catch(InvalidClauseException exc){
             throw new InvalidDatabaseException();
         }catch (IOException exc){

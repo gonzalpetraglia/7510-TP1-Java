@@ -116,8 +116,20 @@ public class KnowledgeBaseTest {
 
     @Test
     public void testAnimalsDatabase() throws InvalidDatabaseException, NoDatabaseException,
-    InvalidQueryException, FileNotFoundException{
+            InvalidQueryException, FileNotFoundException{
         this.knowledgeBase.useDatabase("src/main/resources/onlyFacts.db");
+        Assert.assertTrue(this.knowledgeBase.answer("cat(silvester)."));
+        Assert.assertTrue(this.knowledgeBase.answer("cat(tom)."));
+        Assert.assertFalse(this.knowledgeBase.answer("cat(tweety)."));
+        Assert.assertTrue(this.knowledgeBase.answer("bird(tweety)."));
+        Assert.assertTrue(this.knowledgeBase.answer("dog(pluto)."));
+        Assert.assertTrue(this.knowledgeBase.answer("mouse(jerry)."));
+        Assert.assertFalse(this.knowledgeBase.answer("cat(dog)."));
+    }
+    @Test
+    public void testAnimalsWithEmptyLinesDatabase() throws InvalidDatabaseException, NoDatabaseException,
+            InvalidQueryException, FileNotFoundException{
+        this.knowledgeBase.useDatabase("src/main/resources/onlyFactsWithEmptyLines.db");
         Assert.assertTrue(this.knowledgeBase.answer("cat(silvester)."));
         Assert.assertTrue(this.knowledgeBase.answer("cat(tom)."));
         Assert.assertFalse(this.knowledgeBase.answer("cat(tweety)."));

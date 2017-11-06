@@ -64,9 +64,9 @@ public class RuleParser{
     public Rule parse(String rule) throws InvalidRuleException{
         try{
             rule = rule.trim();
-            if(rule.charAt(rule.length()-1) != '.')
+            if(rule.length() == 0
+                    ||rule.charAt(rule.length()-1) != '.')
                 throw new InvalidRuleException();
-
             String header = this.getHeader(rule);
             String[] equivalentQueries = this.getQueries(rule);
             ParsedStructure structure = CommonStructureParser.getInstance().parse(header);
