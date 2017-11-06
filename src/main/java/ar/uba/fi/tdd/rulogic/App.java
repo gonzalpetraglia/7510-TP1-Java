@@ -17,7 +17,7 @@ import java.io.InputStreamReader;
 public class App
 {
 	public static void main(String[] args) throws IOException{
-		boolean shouldContinue = false;
+		boolean shouldContinue = true;
         KnowledgeBase knowledgeBase = new KnowledgeBase();
         String line;
 		System.out.println("I shall answer all your questions!");
@@ -26,14 +26,16 @@ public class App
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		while(shouldContinue)  {
-
+            System.out.print(">");
             line = br.readLine();
-            if(shouldContinue = line.equals("/exit"))
+            shouldContinue = !line.equals("/exit");
+            if(!shouldContinue)
                 continue;
             if(line.trim().length() == 0 )
                 continue;
 
-            if(line.substring(0,4).equals("/use")){
+            if(line.length() >= 4 &&
+                    line.split(" ")[0].equals("/use")){
                 try{
                     knowledgeBase.useDatabase(line.split(" ")[1]);
 
@@ -42,11 +44,12 @@ public class App
                 }catch (InvalidDatabaseException exc){
                     System.out.println("The database provided is invalid.");
                 }catch (FileNotFoundException exc){
-                    System.out.print("The file wasnt found. ");
+                    System.out.println("The file wasnt found. ");
                 }
+                continue;
             }
             try{
-                knowledgeBase.answer(line);
+                System.out.println(knowledgeBase.answer(line));
             }catch (InvalidQueryException exc){
                 System.out.println("Invalid query");
             }catch (NoDatabaseException exc){
